@@ -4,16 +4,16 @@ from openai import OpenAI
 from my_secrets import OPENAI_API_KEY
 
 client = OpenAI(api_key=OPENAI_API_KEY)
-
+DIMENSIONS = 1000
 res1 = client.embeddings.create(
     input=["splink is a tool for data linkage"],
     model="text-embedding-3-small",
-    dimensions=100,
+    dimensions=DIMENSIONS,
 )
 res2 = client.embeddings.create(
     input=["splink is software for data deduplication at scale "],
     model="text-embedding-3-small",
-    dimensions=100,
+    dimensions=DIMENSIONS,
 )
 
 
