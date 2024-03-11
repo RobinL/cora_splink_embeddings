@@ -1,4 +1,6 @@
+import duckdb
 import numpy as np
+import pandas as pd
 from openai import OpenAI
 
 from my_secrets import OPENAI_API_KEY
@@ -30,3 +32,13 @@ norm_vec1 = np.linalg.norm(e1)
 norm_vec2 = np.linalg.norm(e2)
 similarity = dot_product / (norm_vec1 * norm_vec2)
 similarity
+
+
+df = [{"embed_l": e1, "embed_r": e2}]
+df = pd.DataFrame(df)
+sql = """
+select
+list_cosine_similarity(embed_l, embed_r) > 0.9
+from df
+"""
+duckdb.sql(sql)
